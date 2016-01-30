@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+	<h1>Server Monitor</h1>
+
+	@Model.TimeStamp
+	
+	<table>
+	<tr>
+		<td>Session ID</td>
+		<td>Name</td>	
+		<td>Status</td>
+	</tr>
+	@Each.Clients
+	<tr>
+		<td>@Current.Session</td>
+		<td>@Current.Name</td>
+		<td>@Current.Status</td>
+	</li>
+	@EndEach
+	</table>
+
+</body>
+</html>

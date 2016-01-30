@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Yorkfield.Core;
+
+namespace Yorkfield.Server
+{
+	public class LogServer : ILog
+	{
+		private readonly IDbConnectionFactory factory;
+
+		public LogServer(IDbConnectionFactory factory)
+		{
+			this.factory = factory;
+		}
+
+		public async void Log(LogSeverity severity, string message)
+		{
+			using (var connection = await factory.OpenConnection())
+			{
+				var cmd = connection.CreateCommand();
+				cmd.CommandText = "INSERT INTO Log (Timestamp, Severity, Message) VALUES (@time, @sev, @msg)";
+
+				var timestampParameter = cmd.CreateParameter();
+				timestampParameter.ParameterName = "@time";
+				timestampParameter.Value = DateTime.Now;
+
+				var severityParameter = cmd.CreateParameter();
+				severityParameter.ParameterName = "@sev";
+				severityParameter.Value = severity.ToString();
+
+				var messageParameter = cmd.CreateParameter();
+				messageParameter.ParameterName = "@sev";
+				messageParameter.Value = message;
+
+				await Task.Run(() => cmd.ExecuteNonQuery());
+			}
+		}
+
+		public IReadOnlyCollection<LogItem> ReadLogData(DateTimeOffset @from, DateTimeOffset to)
+		{
+			var list = new List<LogItem>();
+			var task = factory.OpenConnection();
+			task.Wait();
+			using (var connection = task.Result)
+			{
+				var cmd = connection.CreateCommand();
+				cmd.CommandText = "SELECT Timestamp, Severity, Message FROM Log WHERE Timestamp >= @from AND Timestamp <= @to";
+
+				var paramFrom = cmd.CreateParameter();
+				paramFrom.ParameterName = "@from";
+				paramFrom.Value = @from;
+				cmd.Parameters.Add(paramFrom);
+
+				var paramTo = cmd.CreateParameter();
+				paramTo.ParameterName = "@to";
+				paramTo.Value = to;
+				cmd.Parameters.Add(paramTo);
+
+				using (var reader = cmd.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						var timestamp = reader.GetDateTime(0);
+						LogSeverity severity;
+						Enum.TryParse(reader.GetString(1), out severity);
+						var message = reader.GetString(2);
+						var item = new LogItem(timestamp, severity, message);
+						list.Add(item);
+					}
+				}
+				return list;
+			}
+		}
+	}
+}

@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Yorkfield.ServerHost" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainServerWebMonitorAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/main/monitor</Value>
+    </Setting>
+    <Setting Name="LogWebMonitorAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/log/monitor</Value>
+    </Setting>
+    <Setting Name="BaseAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:60000/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Yorkfield.Modeling", "Yorkfield.Modeling\Yorkfield.Modeling.modelproj", "{289D8866-18A6-41E7-BE9A-82A2F136C437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.Core", "Yorkfield.Core\Yorkfield.Core.csproj", "{128FC0E9-70A9-4751-BBCD-5B846817AF43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.Server", "Yorkfield.Server\Yorkfield.Server.csproj", "{86E21DD3-9CFF-408D-9B31-BF6099F36059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.Client", "Yorkfield.Client\Yorkfield.Client.csproj", "{2E5F8CD6-7073-4D24-AFBE-1F3C44F7E391}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.ServerHost", "Yorkfield.ServerHost\Yorkfield.ServerHost.csproj", "{5CCDA9FA-D39A-4557-B885-C293D1C20C38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.ClientHost", "Yorkfield.ClientHost\Yorkfield.ClientHost.csproj", "{379171D5-ADE3-47E3-8593-86CC9405E4FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.Test", "Yorkfield.Test\Yorkfield.Test.csproj", "{BFEF9434-16B0-4B72-9E57-B87E2F8F489B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{289D8866-18A6-41E7-BE9A-82A2F136C437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{289D8866-18A6-41E7-BE9A-82A2F136C437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{289D8866-18A6-41E7-BE9A-82A2F136C437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{289D8866-18A6-41E7-BE9A-82A2F136C437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128FC0E9-70A9-4751-BBCD-5B846817AF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128FC0E9-70A9-4751-BBCD-5B846817AF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128FC0E9-70A9-4751-BBCD-5B846817AF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128FC0E9-70A9-4751-BBCD-5B846817AF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E21DD3-9CFF-408D-9B31-BF6099F36059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E21DD3-9CFF-408D-9B31-BF6099F36059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E21DD3-9CFF-408D-9B31-BF6099F36059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E21DD3-9CFF-408D-9B31-BF6099F36059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5F8CD6-7073-4D24-AFBE-1F3C44F7E391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5F8CD6-7073-4D24-AFBE-1F3C44F7E391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5F8CD6-7073-4D24-AFBE-1F3C44F7E391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5F8CD6-7073-4D24-AFBE-1F3C44F7E391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CCDA9FA-D39A-4557-B885-C293D1C20C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CCDA9FA-D39A-4557-B885-C293D1C20C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CCDA9FA-D39A-4557-B885-C293D1C20C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CCDA9FA-D39A-4557-B885-C293D1C20C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{379171D5-ADE3-47E3-8593-86CC9405E4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379171D5-ADE3-47E3-8593-86CC9405E4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379171D5-ADE3-47E3-8593-86CC9405E4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379171D5-ADE3-47E3-8593-86CC9405E4FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFEF9434-16B0-4B72-9E57-B87E2F8F489B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFEF9434-16B0-4B72-9E57-B87E2F8F489B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFEF9434-16B0-4B72-9E57-B87E2F8F489B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFEF9434-16B0-4B72-9E57-B87E2F8F489B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

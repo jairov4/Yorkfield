@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
+  dslVersion="1.0.0.0"
+  Id="904cb4ad-f879-43d4-8f53-7682b1fca18a"
+  name="Yorkfield.Modeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <component
+        Id="313facee-f04d-495d-9db1-7ce850e72199"
+        name="Server"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="0390c62f-3ae5-45fa-a896-578a9d516f70"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="7ee329a0-103b-499e-aebc-d0972129b9c2"
+                LastKnownName="IServer"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface
+            Id="ca265b3d-4ff8-4d22-9cee-9a99e94e41a4"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="3e6f4b69-6738-4474-baab-2583274b3cc6"
+                LastKnownName="Web"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface
+            Id="4fab3dc7-3cce-44b0-89d6-7e1bfb666428"
+            name="Port3"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="4529ae11-28ab-4119-8d09-e77b30718934">
+                <providedInterfaceMoniker
+                  Id="55588175-ef58-4893-b253-db209075114c"
+                  LastKnownName="Port2"
+                  LastKnownLocation="Yorkfield.Modeling.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="4417e29c-bf02-4ab9-8468-4b4b622be15c"
+                LastKnownName="ILog"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="465b52f7-ddd7-43c4-aa01-64017f42d4b5"
+        name="LogServer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="d2512fbd-d9a0-451b-9497-18c330bac058"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="af87340f-d226-4e56-96bf-9f5a0be69492"
+                LastKnownName="Web"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface
+            Id="55588175-ef58-4893-b253-db209075114c"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="9d89a7b3-a57b-4928-bc07-2ee24ec7fb63"
+                LastKnownName="ILog"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="7e943b8a-e8cd-43aa-aa8b-e01f0b2b8144"
+        name="Client"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="4b5f6f57-3b64-4701-b800-155fe9bb951a"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="a5fb4d01-d288-4706-828c-0a94f0f2c94a">
+                <providedInterfaceMoniker
+                  Id="0390c62f-3ae5-45fa-a896-578a9d516f70"
+                  LastKnownName="Port1"
+                  LastKnownLocation="Yorkfield.Modeling.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="38f1b107-ad5a-49e7-a1d9-471b4c18bba1"
+                LastKnownName="IServer"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="eb8b2972-34b6-4d29-be08-ddcc18cf1b32"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="eab34a71-77cc-488f-a526-27b8b2f8eb3f">
+                <providedInterfaceMoniker
+                  Id="55588175-ef58-4893-b253-db209075114c"
+                  LastKnownName="Port2"
+                  LastKnownLocation="Yorkfield.Modeling.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="cb48e398-417c-4e6f-9b99-599dad3eaeab"
+                LastKnownName="ILog"
+                LastKnownLocation="Yorkfield.Modeling.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="e82797f5-bde1-4f66-9dc3-1fb707cb90b8"
+        name="Component4"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7ee329a0-103b-499e-aebc-d0972129b9c2"
+        name="IServer"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="3e6f4b69-6738-4474-baab-2583274b3cc6"
+        name="Web"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="af87340f-d226-4e56-96bf-9f5a0be69492"
+        name="Web"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="9d89a7b3-a57b-4928-bc07-2ee24ec7fb63"
+        name="ILog"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="4417e29c-bf02-4ab9-8468-4b4b622be15c"
+        name="ILog"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="38f1b107-ad5a-49e7-a1d9-471b4c18bba1"
+        name="IServer"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="cb48e398-417c-4e6f-9b99-599dad3eaeab"
+        name="ILog"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

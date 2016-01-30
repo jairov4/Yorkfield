@@ -1,0 +1,8 @@
+﻿USE [YorkfieldDB];
+
+CREATE TABLE [Log] (
+	[Id] UNIQUEIDENTIFIER PRIMARY KEY, 
+	[Timestamp] DATETIMEOFFSET NOT NULL,
+	[Severity] VARCHAR(15) NOT NULL, 
+	[Message] VARCHAR(MAX) NOT NULL
+);
