@@ -1,14 +1,19 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace Yorkfield.Server
 {
+	/// <summary>
+	/// Microsoft SQL Server connection factory implementation
+	/// </summary>
 	public class SqlConnectionFactory : IDbConnectionFactory
 	{
+		/// <summary>
+		/// Opens the connection to database.
+		/// </summary>
+		/// <returns></returns>
 		public async Task<IDbConnection> OpenConnection()
 		{
 			var connectionString = ConfigurationManager.ConnectionStrings[0];

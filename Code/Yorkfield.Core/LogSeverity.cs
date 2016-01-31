@@ -2,6 +2,9 @@
 
 namespace Yorkfield.Core
 {
+	/// <summary>
+	/// Indicates the log entry severity
+	/// </summary>
 	[DataContract]
 	public enum LogSeverity
 	{

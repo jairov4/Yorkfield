@@ -4,6 +4,9 @@ using System.ServiceModel;
 
 namespace Yorkfield.Core
 {
+	/// <summary>
+	/// Represent the log functionality
+	/// </summary>
 	[ServiceContract]
 	public interface ILog
 	{

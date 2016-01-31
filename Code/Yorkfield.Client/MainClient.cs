@@ -12,12 +12,25 @@ using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Client
 {
+	/// <summary>
+	/// Represents the client that connects to server
+	/// </summary>
 	public class MainClient : IClient
 	{
+		/// <summary>
+		/// Gets or sets the time out milliseconds.
+		/// </summary>
+		/// <value>
+		/// The time out milliseconds.
+		/// </value>
 		public int TimeOutMilliseconds { get; set; }
 
 		public ILog log;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MainClient"/> class.
+		/// </summary>
+		/// <param name="log">The log.</param>
 		public MainClient(ILog log)
 		{
 			RequiresNotNull(log);
@@ -25,6 +38,10 @@ namespace Yorkfield.Client
 			this.log = log;
 		}
 
+		/// <summary>
+		/// Starts the specified server.
+		/// </summary>
+		/// <param name="server">The server.</param>
 		public void Start(IServer server)
 		{
 			RequiresNotNull(server);

@@ -1,48 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Yorkfield.Core;
 using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
+	/// <summary>
+	/// The Log server
+	/// </summary>
 	public class LogServer : ILog
 	{
 		private readonly IDbConnectionFactory factory;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="LogServer"/> class.
+		/// </summary>
+		/// <param name="factory">The database connection factory.</param>
 		public LogServer(IDbConnectionFactory factory)
 		{
 			RequiresNotNull(factory);
 			this.factory = factory;
 		}
 
-		public async void Log(LogSeverity severity, string message)
+		/// <summary>
+		/// Logs the specified severity.
+		/// </summary>
+		/// <param name="severity">The severity.</param>
+		/// <param name="message">The message.</param>
+		public void Log(LogSeverity severity, string message)
 		{
 			RequiresNotNull(message);
-			using (var connection = await factory.OpenConnection())
+			var con = factory.OpenConnection();
+			con.ContinueWith(pt =>
 			{
-				var cmd = connection.CreateCommand();
-				cmd.CommandText = "INSERT INTO Log (Id, Timestamp, Severity, Message) VALUES (NEWID(), @time, @sev, @msg)";
+				var connection = pt.Result;
+				try
+				{
+					var cmd = connection.CreateCommand();
+					cmd.CommandText = "INSERT INTO Log (Id, Timestamp, Severity, Message) VALUES (NEWID(), @time, @sev, @msg)";
 
-				var timestampParameter = cmd.CreateParameter();
-				timestampParameter.ParameterName = "@time";
-				timestampParameter.Value = DateTime.Now;
-				cmd.Parameters.Add(timestampParameter);
+					var timestampParameter = cmd.CreateParameter();
+					timestampParameter.ParameterName = "@time";
+					timestampParameter.Value = DateTime.Now;
+					cmd.Parameters.Add(timestampParameter);
 
-				var severityParameter = cmd.CreateParameter();
-				severityParameter.ParameterName = "@sev";
-				severityParameter.Value = severity.ToString();
-				cmd.Parameters.Add(severityParameter);
+					var severityParameter = cmd.CreateParameter();
+					severityParameter.ParameterName = "@sev";
+					severityParameter.Value = severity.ToString();
+					cmd.Parameters.Add(severityParameter);
 
-				var messageParameter = cmd.CreateParameter();
-				messageParameter.ParameterName = "@msg";
-				messageParameter.Value = message;
-				cmd.Parameters.Add(messageParameter);
+					var messageParameter = cmd.CreateParameter();
+					messageParameter.ParameterName = "@msg";
+					messageParameter.Value = message;
+					cmd.Parameters.Add(messageParameter);
 
-				await Task.Run(() => cmd.ExecuteNonQuery());
-			}
+					cmd.ExecuteNonQuery();
+				}
+				finally
+				{
+					connection.Dispose();
+				}
+			});
 		}
 
+		/// <summary>
+		/// Reads the log data.
+		/// </summary>
+		/// <param name="from">Initial timestamp to search from.</param>
+		/// <param name="to">Final timestamp up search to.</param>
+		/// <returns>Collection of log items found</returns>
 		public IReadOnlyCollection<LogItem> ReadLogData(DateTimeOffset @from, DateTimeOffset to)
 		{
 			var list = new List<LogItem>();

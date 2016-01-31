@@ -15,6 +15,12 @@ namespace Yorkfield.Core
 		
 		[DataMember] private string targetUnitTestingAssembly;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="BuildInstructions"/> class.
+		/// </summary>
+		/// <param name="session">The session.</param>
+		/// <param name="buildCommand">The build command.</param>
+		/// <param name="targetUnitTestingAssembly">The target unit testing assembly.</param>
 		public BuildInstructions(Guid session, string buildCommand, string targetUnitTestingAssembly)
 		{
 			RequiresNotNull(buildCommand);
@@ -24,10 +30,25 @@ namespace Yorkfield.Core
 			this.session = session;
 		}
 
+		/// <summary>
+		/// Gets the session identifier
+		/// </summary>
 		public Guid Session => session;
 
+		/// <summary>
+		/// Gets the build command.
+		/// </summary>
+		/// <value>
+		/// The build command.
+		/// </value>
 		public string BuildCommand => buildCommand;
 
+		/// <summary>
+		/// Gets the target unit testing assembly.
+		/// </summary>
+		/// <value>
+		/// The target unit testing assembly.
+		/// </value>
 		public string TargetUnitTestingAssembly => targetUnitTestingAssembly;
 	}
 }

@@ -4,12 +4,13 @@ using Autofac;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
-using Nancy.Diagnostics;
-using Yorkfield.Core;
 using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
+	/// <summary>
+	/// Bootstrapper that adapts Nancy to use a prepared <see cref="Autofac"/> container
+	/// </summary>
 	public class NancyBootstrapper : AutofacNancyBootstrapper
 	{
 		private readonly ILifetimeScope rootContainer;
@@ -25,6 +26,10 @@ namespace Yorkfield.Server
 			this.rootContainer = rootContainer;
 		}
 
+		/// <summary>
+		/// Gets the application container.
+		/// </summary>
+		/// <returns></returns>
 		protected override ILifetimeScope GetApplicationContainer()
 		{
 			return rootContainer;
