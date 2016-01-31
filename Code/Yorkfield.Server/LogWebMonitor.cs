@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Nancy;
 using Nancy.Responses;
 using Yorkfield.Core;
@@ -24,10 +25,24 @@ namespace Yorkfield.Server
 		{
 			public Model(IReadOnlyCollection<LogItem> items)
 			{
-				Items = items;
+				Items = items.Select(x => new LogItemModel(x));
 			}
 
-			public IReadOnlyCollection<LogItem> Items { get; }
+			public IEnumerable<LogItemModel> Items { get; }
+		}
+
+		public class LogItemModel
+		{
+			public LogItemModel(LogItem logItem)
+			{
+				LogItem = logItem;
+			}
+
+			public LogItem LogItem { get; }
+
+			public bool IsError => LogItem.Severity == LogSeverity.Error;
+			public bool IsInformation => LogItem.Severity == LogSeverity.Information;
+			public bool IsWarning => LogItem.Severity == LogSeverity.Warning;
 		}
 	}
 }

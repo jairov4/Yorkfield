@@ -22,9 +22,9 @@ Here you can see one row per log entry in the database. This data is ordered by 
 </tr>
 @Each.Items
 <tr>
-	<td>@Current.Timestamp</td>
-	<td>@Current.Severity</td>
-	<td>@Current.Message</td>
+	<td>@Current.LogItem.Timestamp</td>
+	<td class="@If.IsError error @EndIf@If.IsWarning warning @EndIf@If.IsInformation information @EndIf" >@Current.LogItem.Severity</td>
+	<td>@Current.LogItem.Message</td>
 </tr>
 @EndEach
 </table>
