@@ -30,10 +30,6 @@ namespace Yorkfield.ClientHost
 			var builder = new ContainerBuilder();
 			builder.RegisterType<MainClient>()
 				.As<IClient>();
-
-			builder.RegisterType<MyDataContractResolver>()
-				.As<DataContractResolver>()
-				.SingleInstance();
 			
 			builder.RegisterGeneric(typeof (ChannelFactory<>))
 				.UsingConstructor(typeof(string))
@@ -52,8 +48,6 @@ namespace Yorkfield.ClientHost
 		private static T CreateWcfClient<T>(IComponentContext scope)
 		{
 			var factory = scope.Resolve<ChannelFactory<T>>();
-			var dcr = scope.Resolve<DataContractResolver>();
-			factory.AddDataContractResolver(dcr);
 			return factory.CreateChannel();
 		}
 	}

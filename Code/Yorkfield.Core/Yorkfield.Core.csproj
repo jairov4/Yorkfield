@@ -49,7 +49,6 @@
     <Compile Include="BuildInstructions.cs" />
     <Compile Include="BuildStatus.cs" />
     <Compile Include="ClientInformation.cs" />
-    <Compile Include="DataContractResolver.cs" />
     <Compile Include="LogItem.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="ILog.cs" />

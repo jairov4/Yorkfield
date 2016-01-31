@@ -3,13 +3,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Log Server Web Monitor</title>
+	<link href="@Path['~/Content/Stylesheet.css']" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-<h1>Log Monitor</h1>
+
+<h1>Yorkfield Log Monitor</h1>
+
+<p>
+Here you can see one row per log entry in the database. This data is ordered by timestamp.
+</p>
 
 <table>
-<tr>
+<tr class="header">
 	<td>Timestamp</td>
 	<td>Severity</td>
 	<td>Message</td>

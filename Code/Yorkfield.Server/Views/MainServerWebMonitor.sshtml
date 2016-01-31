@@ -3,15 +3,16 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Main Server Web Monitor</title>
+	<link href="@Path['~/Content/Stylesheet.css']" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-	<h1>Server Monitor</h1>
+	<h1>Yorkfield Server Monitor</h1>
 
-	@Model.TimeStamp
+	<p>Showing build sessions subscribed by clients, this snapshot was taken in <em>@Model.TimeStamp</em></p>
 	
 	<table>
-	<tr>
+	<tr class="header">
 		<td>Session ID</td>
 		<td>Name</td>	
 		<td>Status</td>

@@ -1,0 +1,45 @@
+﻿body
+{	
+	margin: 0 auto;
+	width: 920px;
+	font-family: 'Segoe UI', Helvetica, 'Droid Sans', Tahoma, Geneva, Sans-serif;
+	font-size: 10pt;
+	color: #acacac;
+}
+
+table
+{
+	min-width: 800px;
+	border: 0;
+	background-color: #eee;
+	border-collapse: collapse;
+}
+
+td
+{
+	overflow: hidden;
+    border: 1px Solid #CFCFCF;    
+
+    background-color: #f0f0f0!important;
+    color: #323232!important;
+    padding: 4px 4px 5px!important;
+}
+
+tr.header td
+{
+	border: 0;
+	background-color: #7f7f7f!important;
+    color: #fff!important;
+}
+
+em {
+	color: #444;
+}
+
+h1 {
+	color: #333;
+	font-family: 'Segoe UI Light', 'Segoe UI', Helvetica, 'Droid Sans', Tahoma, Geneva, Sans-serif;
+    font-size: 36px;
+    font-weight: lighter;
+    line-height: 100%;
+}

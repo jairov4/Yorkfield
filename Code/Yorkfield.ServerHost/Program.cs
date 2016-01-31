@@ -63,7 +63,6 @@ namespace Yorkfield.ServerHost
 		{
 			var host = new ServiceHost(typeof(TConcrete));
 			host.AddDependencyInjectionBehavior<TContract>(container);
-			host.AddDataContractResolver(new MyDataContractResolver());
 			host.Opened += ServiceHost_Opened;
 			host.Closed += ServiceHost_Closed;
 			host.Open();
