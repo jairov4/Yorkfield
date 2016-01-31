@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Diagnostics;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac;
-using Autofac.Core;
 using Yorkfield.Client;
 using Yorkfield.Core;
 
 namespace Yorkfield.ClientHost
 {
-	class Program
+	internal class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			using (var container = Bootstrap())
 			{
@@ -27,7 +20,7 @@ namespace Yorkfield.ClientHost
 				}
 				catch (CommunicationException e)
 				{
-					Trace.WriteLine("Communication error, check connectivity: "+ e.Message);
+					Trace.WriteLine("Communication error, check connectivity: " + e.Message);
 				}
 			}
 		}
@@ -37,9 +30,9 @@ namespace Yorkfield.ClientHost
 			var builder = new ContainerBuilder();
 			builder.RegisterType<MainClient>()
 				.As<IClient>();
-			
+
 			builder.RegisterGeneric(typeof (ChannelFactory<>))
-				.UsingConstructor(typeof(string))
+				.UsingConstructor(typeof (string))
 				.WithParameter(new PositionalParameter(0, "*"))
 				.InstancePerLifetimeScope();
 
@@ -48,7 +41,7 @@ namespace Yorkfield.ClientHost
 
 			builder.Register(CreateWcfClient<ILog>)
 				.As<ILog>();
-			
+
 			return builder.Build();
 		}
 
