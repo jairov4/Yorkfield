@@ -48,7 +48,7 @@ namespace Yorkfield.Server
 			using (var connection = task.Result)
 			{
 				var cmd = connection.CreateCommand();
-				cmd.CommandText = "SELECT cast(Timestamp as datetime), Severity, Message FROM Log WHERE Timestamp >= @from AND Timestamp <= @to";
+				cmd.CommandText = "SELECT cast(Timestamp as datetime), Severity, Message FROM Log WHERE Timestamp >= @from AND Timestamp <= @to ORDER BY Timestamp DESC";
 
 				var paramFrom = cmd.CreateParameter();
 				paramFrom.ParameterName = "@from";

@@ -10,13 +10,15 @@
 
 <table>
 <tr>
-<td></td>
+	<td>Timestamp</td>
+	<td>Severity</td>
+	<td>Message</td>
 </tr>
 @Each.Items
 <tr>
-<td>@Current.Name</td>
-<td>@Current.</td>
-<td>@Current.Name</td>
+	<td>@Current.Timestamp</td>
+	<td>@Current.Severity</td>
+	<td>@Current.Message</td>
 </tr>
 @EndEach
 </table>
