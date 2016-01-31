@@ -18,18 +18,42 @@ table
 td
 {
 	overflow: hidden;
-    border: 1px Solid #CFCFCF;    
-
-    background-color: #f0f0f0!important;
-    color: #323232!important;
-    padding: 4px 4px 5px!important;
+    padding: 4px 4px 5px;
 }
 
-tr.header td
+tr 
+{
+	border: 1px Solid #CFCFCF;
+
+    background-color: #f0f0f0;
+    color: #323232;
+}
+
+tr.header
 {
 	border: 0;
-	background-color: #7f7f7f!important;
-    color: #fff!important;
+	background-color: #7f7f7f;
+    color: #fff;
+    text-align: center;
+}
+
+tr.error
+{
+	color: #9C0006;
+	background-color: #FFC7CE;
+	border: 0;
+}
+
+tr.warning
+{
+	color: #C06500;
+	background-color: #FFEB9C;
+	border: 0;
+}
+
+tr.information
+{
+	border: 0;
 }
 
 em {
