@@ -2,6 +2,7 @@
 using System.Linq;
 using Nancy;
 using Yorkfield.Core;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
@@ -9,11 +10,14 @@ namespace Yorkfield.Server
 	{
 		public MainServerWebMonitor(IServer server, string path) : base(path)
 		{
+			RequiresNotNull(server);
+			RequiresNotNull(path);
 			Get["/"] = _ => View["MainServerWebMonitor", GetModel(server)];
 		}
 
 		private Model GetModel(IServer server)
 		{
+			RequiresNotNull(server);
 			var r = server.PollCurrentStatus();
 			var model = new Model(r);
 			return model;
@@ -23,6 +27,7 @@ namespace Yorkfield.Server
 		{
 			public Model(ServerStatus state)
 			{
+				RequiresNotNull(state);
 				State = state;
 				Items = state.Clients.Select(x => new Item(x)).ToList();
 			}
@@ -38,6 +43,7 @@ namespace Yorkfield.Server
 
 			public Item(ClientInformation client)
 			{
+				RequiresNotNull(client);
 				this.Client = client;
 				var r = client.TestResults.Select(x => x.Name + ": " + x.Status).Take(10);
 				var tip = string.Join(" | ", r);

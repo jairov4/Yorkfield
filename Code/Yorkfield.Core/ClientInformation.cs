@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Core
 {
@@ -18,6 +19,9 @@ namespace Yorkfield.Core
 
 		public ClientInformation(string name, Guid session, BuildStatus status, IReadOnlyCollection<TestResult> testResults)
 		{
+			RequiresNotNull(name);
+			RequiresNotNull(status);
+			RequiresNotNull(testResults);
 			this.name = name;
 			this.status = status;
 			this.testResults = testResults;

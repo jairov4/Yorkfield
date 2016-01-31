@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Yorkfield.Core;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
@@ -24,12 +25,14 @@ namespace Yorkfield.Server
 
 		public BuildInstructions GetBuildInstructions(string clientName)
 		{
+			RequiresNotNull(clientName);
 			var session = new BuildInstructions(Guid.NewGuid(), buildCommand, targetUnitTestingAssembly);
 			return session;
 		}
 
 		public void UpdateClientStatus(ClientInformation info)
 		{
+			RequiresNotNull(info);
 			statusBySession[info.Session] = info;
 		}
 

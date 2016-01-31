@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Core
 {
@@ -16,6 +17,8 @@ namespace Yorkfield.Core
 
 		public BuildInstructions(Guid session, string buildCommand, string targetUnitTestingAssembly)
 		{
+			RequiresNotNull(buildCommand);
+			RequiresNotNull(targetUnitTestingAssembly);
 			this.buildCommand = buildCommand;
 			this.targetUnitTestingAssembly = targetUnitTestingAssembly;
 			this.session = session;

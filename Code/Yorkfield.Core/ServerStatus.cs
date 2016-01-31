@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Core
 {
@@ -13,6 +14,7 @@ namespace Yorkfield.Core
 
 		public ServerStatus(DateTimeOffset timeStamp, IReadOnlyCollection<ClientInformation> clients)
 		{
+			RequiresNotNull(clients);
 			this.timeStamp = timeStamp;
 			this.clients = clients;
 		}

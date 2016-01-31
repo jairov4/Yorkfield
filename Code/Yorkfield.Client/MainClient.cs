@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using NUnit.Engine;
 using Yorkfield.Core;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Client
 {
@@ -19,13 +20,15 @@ namespace Yorkfield.Client
 
 		public MainClient(ILog log)
 		{
+			RequiresNotNull(log);
 			TimeOutMilliseconds = 250000;
 			this.log = log;
 		}
 
 		public void Start(IServer server)
 		{
-			BuildInstructions instructions = new BuildInstructions(Guid.Empty, string.Empty, string.Empty);
+			RequiresNotNull(server);
+			var instructions = new BuildInstructions(Guid.Empty, string.Empty, string.Empty);
 			try
 			{
 				instructions = GetBuildInstructions(server);

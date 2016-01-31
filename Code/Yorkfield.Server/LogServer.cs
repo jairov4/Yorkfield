@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Yorkfield.Core;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
@@ -11,11 +12,13 @@ namespace Yorkfield.Server
 
 		public LogServer(IDbConnectionFactory factory)
 		{
+			RequiresNotNull(factory);
 			this.factory = factory;
 		}
 
 		public async void Log(LogSeverity severity, string message)
 		{
+			RequiresNotNull(message);
 			using (var connection = await factory.OpenConnection())
 			{
 				var cmd = connection.CreateCommand();

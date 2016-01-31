@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Core
 {
@@ -8,6 +9,7 @@ namespace Yorkfield.Core
 	{
 		public LogItem(DateTimeOffset? timestamp, LogSeverity severity, string message)
 		{
+			RequiresNotNull(message);
 			this.timestamp = timestamp;
 			this.severity = severity;
 			this.message = message;

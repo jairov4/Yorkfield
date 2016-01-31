@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Nancy;
-using Nancy.Responses;
 using Yorkfield.Core;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
@@ -12,6 +11,7 @@ namespace Yorkfield.Server
 	{
 		public LogWebMonitor(ILog log, string baseUri) : base(baseUri)
 		{
+			RequiresNotNull(log);
 			Get["/"] = _ => View["LogWebMonitor", GetModel(log)];
 		}
 
@@ -25,6 +25,7 @@ namespace Yorkfield.Server
 		{
 			public Model(IReadOnlyCollection<LogItem> items)
 			{
+				RequiresNotNull(items);
 				Items = items.Select(x => new LogItemModel(x));
 			}
 
@@ -35,6 +36,7 @@ namespace Yorkfield.Server
 		{
 			public LogItemModel(LogItem logItem)
 			{
+				RequiresNotNull(logItem);
 				LogItem = logItem;
 			}
 

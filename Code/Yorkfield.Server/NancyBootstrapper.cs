@@ -5,6 +5,8 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Diagnostics;
+using Yorkfield.Core;
+using static Yorkfield.Core.CodeContracts;
 
 namespace Yorkfield.Server
 {
@@ -18,6 +20,7 @@ namespace Yorkfield.Server
 		/// <param name="rootContainer">The root container.</param>
 		public NancyBootstrapper(IContainer rootContainer)
 		{
+			RequiresNotNull(rootContainer);
 			// Overrides the default container creation
 			this.rootContainer = rootContainer;
 		}
@@ -34,6 +37,8 @@ namespace Yorkfield.Server
 
 		protected override INancyModule GetModule(ILifetimeScope container, Type moduleType)
 		{
+			RequiresNotNull(container);
+			RequiresNotNull(moduleType);
 			object module;
 			return container.TryResolve(moduleType, out module) ? (INancyModule) module : null;
 		}
