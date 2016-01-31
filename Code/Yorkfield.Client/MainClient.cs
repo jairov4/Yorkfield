@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using NUnit.Engine;
 using Yorkfield.Core;
 
@@ -79,9 +82,29 @@ namespace Yorkfield.Client
 					result2 = runner.Run(null, filter);
 				}
 			}
+			
+			Func<string, TestStatus> parse = x =>
+			{
+				if(x == "Passed") return TestStatus.Passed;
+				return TestStatus.Failed;
+			};
 
-			var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Successful,
-				new TestResult[0]);
+			ClientInformation status;
+			try
+			{
+				var root = XDocument.Parse(result2.OuterXml);
+				var testResults =
+					from el in root.Descendants("test-case")
+					select new TestResult(el.Attribute("name").Value, parse(el.Attribute("result").Value));
+				status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Successful, testResults.ToArray());
+			}
+			catch (Exception e)
+			{
+				var msg = "Error parsing test result XML document, check version of NUnit";
+				log.Log(LogSeverity.Error, msg);
+				throw new ApplicationException(msg, e);
+			}
+			
 			server.UpdateClientStatus(status);
 			log.Log(LogSeverity.Information, "Test fixtures execution complete");
 		}

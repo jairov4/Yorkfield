@@ -16,7 +16,7 @@ Here you can see one row per log entry in the database. This data is ordered by 
 
 <table>
 <tr class="header">
-	<td>Timestamp</td>
+	<td width="210">Timestamp</td>
 	<td>Severity</td>
 	<td>Message</td>
 </tr>

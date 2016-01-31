@@ -9,20 +9,22 @@
 <body>
 	<h1>Yorkfield Server Monitor</h1>
 
-	<p>Showing build sessions subscribed by clients, this snapshot was taken in <em>@Model.TimeStamp</em></p>
+	<p>Showing build sessions subscribed by clients, this snapshot was taken in <em>@Model.State.TimeStamp</em></p>
 	
 	<table>
 	<tr class="header">
 		<td>Session ID</td>
 		<td>Name</td>	
 		<td>Status</td>
+		<td>Tests Passed</td>
 	</tr>
-	@Each.Clients
+	@Each.Items
 	<tr>
-		<td>@Current.Session</td>
-		<td>@Current.Name</td>
-		<td>@Current.Status</td>
-	</li>
+		<td>@Current.Client.Session</td>
+		<td>@Current.Client.Name</td>
+		<td>@Current.Client.Status</td>
+		<td><a class="tip" data-tip="@Current.Tip">@Current.Passed/@Current.Total</a></td>
+	</tr>
 	@EndEach
 	</table>
 

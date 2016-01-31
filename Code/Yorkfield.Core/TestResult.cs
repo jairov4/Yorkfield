@@ -7,9 +7,9 @@ namespace Yorkfield.Core
 	{
 		[DataMember] private string name;
 
-		[DataMember] private BuildStatus status;
+		[DataMember] private TestStatus status;
 
-		public TestResult(string name, BuildStatus status)
+		public TestResult(string name, TestStatus status)
 		{
 			this.name = name;
 			this.status = status;
@@ -17,6 +17,6 @@ namespace Yorkfield.Core
 
 		public string Name => name;
 
-		public BuildStatus Status => status;
+		public TestStatus Status => status;
 	}
 }

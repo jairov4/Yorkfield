@@ -19,9 +19,16 @@ namespace Yorkfield.ClientHost
 		{
 			using (var container = Bootstrap())
 			{
-				Trace.Listeners.Add(new ConsoleTraceListener());
-				var client = container.Resolve<IClient>();
-				client.Start(container.Resolve<IServer>());
+				try
+				{
+					Trace.Listeners.Add(new ConsoleTraceListener());
+					var client = container.Resolve<IClient>();
+					client.Start(container.Resolve<IServer>());
+				}
+				catch (CommunicationException e)
+				{
+					Trace.WriteLine("Communication error, check connectivity: "+ e.Message);
+				}
 			}
 		}
 

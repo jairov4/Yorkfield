@@ -17,17 +17,25 @@ namespace Yorkfield.ServerHost
 		{
 			using (var container = Bootstrap())
 			{
-				Trace.Listeners.Add(new ConsoleTraceListener());
-				var host1 = StartWcfServer<IServer, MainServer>(container);
-				var host2 = StartWcfServer<ILog, LogServer>(container);
-				var nancyHost = new NancyHost(new NancyBootstrapper(container), new Uri(Settings.Default.BaseAddress));
-				Trace.WriteLine("Web host started");
-				nancyHost.Start();
-				Console.ReadKey();
-				host1.Close();
-				host2.Close();
-				nancyHost.Stop();
-				Trace.WriteLine("Web host stopped");
+				try
+				{
+					var log = container.Resolve<ILog>();
+					Trace.Listeners.Add(new ConsoleTraceListener());
+					var host1 = StartWcfServer<IServer, MainServer>(container);
+					var host2 = StartWcfServer<ILog, LogServer>(container);
+					var nancyHost = new NancyHost(new NancyBootstrapper(container), new Uri(Settings.Default.BaseAddress));
+					log.Log(LogSeverity.Information, "Web host started");
+					nancyHost.Start();
+					Console.ReadKey();
+					host1.Close();
+					host2.Close();
+					nancyHost.Stop();
+					log.Log(LogSeverity.Information, "Web host stopped");
+				}
+				catch (Exception e)
+				{
+					Trace.WriteLine("Unexpected fatal error, the server was shutdown: " + e.Message);
+				}
 			}
 		}
 
@@ -63,23 +71,22 @@ namespace Yorkfield.ServerHost
 		{
 			var host = new ServiceHost(typeof(TConcrete));
 			host.AddDependencyInjectionBehavior<TContract>(container);
-			host.Opened += ServiceHost_Opened;
-			host.Closed += ServiceHost_Closed;
+			var log = container.Resolve<ILog>();
+			host.Opened += (s,e) => ServiceHost_Opened(host, log);
+			host.Closed += (s,e) => ServiceHost_Closed(host, log);
 			host.Open();
 			return host;
 		}
 
-		private static void ServiceHost_Closed(object sender, EventArgs e)
+		private static void ServiceHost_Closed(ServiceHost host, ILog log)
 		{
-			var host = (ServiceHost) sender;
-			Trace.WriteLine($"Service endpoint closed: {host.Description.ServiceType}");
+			log.Log(LogSeverity.Information, $"Service endpoint closed: {host.Description.ServiceType}");
 		}
 
-		private static void ServiceHost_Opened(object sender, EventArgs e)
+		private static void ServiceHost_Opened(ServiceHost host, ILog log)
 		{
-			var host = (ServiceHost) sender;
 			var addrs = string.Join(", ", host.Description.Endpoints.Select(x => x.Address));
-			Trace.WriteLine($"Service endpoint started: {host.Description.ServiceType}: {addrs}");
+			log.Log(LogSeverity.Information, $"Service endpoint started: {host.Description.ServiceType}: {addrs}");
 		}
 	}
 }
