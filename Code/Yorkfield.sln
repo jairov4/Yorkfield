@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.ClientHost", "Yor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yorkfield.Test", "Yorkfield.Test\Yorkfield.Test.csproj", "{BFEF9434-16B0-4B72-9E57-B87E2F8F489B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{923E9593-CB11-4E79-B0D5-53E7353E0940}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\Initialize.sql = SQL\Initialize.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

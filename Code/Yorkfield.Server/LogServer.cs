@@ -19,19 +19,22 @@ namespace Yorkfield.Server
 			using (var connection = await factory.OpenConnection())
 			{
 				var cmd = connection.CreateCommand();
-				cmd.CommandText = "INSERT INTO Log (Timestamp, Severity, Message) VALUES (@time, @sev, @msg)";
+				cmd.CommandText = "INSERT INTO Log (Id, Timestamp, Severity, Message) VALUES (NEWID(), @time, @sev, @msg)";
 
 				var timestampParameter = cmd.CreateParameter();
 				timestampParameter.ParameterName = "@time";
 				timestampParameter.Value = DateTime.Now;
+				cmd.Parameters.Add(timestampParameter);
 
 				var severityParameter = cmd.CreateParameter();
 				severityParameter.ParameterName = "@sev";
 				severityParameter.Value = severity.ToString();
+				cmd.Parameters.Add(severityParameter);
 
 				var messageParameter = cmd.CreateParameter();
-				messageParameter.ParameterName = "@sev";
+				messageParameter.ParameterName = "@msg";
 				messageParameter.Value = message;
+				cmd.Parameters.Add(messageParameter);
 
 				await Task.Run(() => cmd.ExecuteNonQuery());
 			}
@@ -45,7 +48,7 @@ namespace Yorkfield.Server
 			using (var connection = task.Result)
 			{
 				var cmd = connection.CreateCommand();
-				cmd.CommandText = "SELECT Timestamp, Severity, Message FROM Log WHERE Timestamp >= @from AND Timestamp <= @to";
+				cmd.CommandText = "SELECT cast(Timestamp as datetime), Severity, Message FROM Log WHERE Timestamp >= @from AND Timestamp <= @to";
 
 				var paramFrom = cmd.CreateParameter();
 				paramFrom.ParameterName = "@from";

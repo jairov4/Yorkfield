@@ -8,9 +8,18 @@
 <body>
 <h1>Log Monitor</h1>
 
+<table>
+<tr>
+<td></td>
+</tr>
 @Each.Items
-Item
+<tr>
+<td>@Current.Name</td>
+<td>@Current.</td>
+<td>@Current.Name</td>
+</tr>
 @EndEach
+</table>
 
 </body>
 </html>

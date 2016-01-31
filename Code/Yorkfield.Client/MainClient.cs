@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Xml;
 using NUnit.Engine;
-using NUnit.Engine.Services;
 using Yorkfield.Core;
 
 namespace Yorkfield.Client
@@ -11,21 +12,60 @@ namespace Yorkfield.Client
 	{
 		public int TimeOutMilliseconds { get; set; }
 
-		public MainClient()
+		public ILog log;
+
+		public MainClient(ILog log)
 		{
 			TimeOutMilliseconds = 250000;
+			this.log = log;
 		}
 
 		public void Start(IServer server)
 		{
-			var instructions = server.GetBuildInstructions(Environment.MachineName);
-			BuildProject(server, instructions);
-			ExecuteNUnitTestRunner(server, instructions);
+			BuildInstructions instructions = new BuildInstructions(Guid.Empty, string.Empty, string.Empty);
+			try
+			{
+				instructions = GetBuildInstructions(server);
+				BuildProject(server, instructions);
+				ExecuteNUnitTestRunner(server, instructions);
+			}
+			catch (FileNotFoundException e)
+			{
+				log.Log(LogSeverity.Error,  $"The file was not found: {e.FileName}");
+				var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Failed,
+					new TestResult[0]);
+				server.UpdateClientStatus(status);
+			}
+			catch (Win32Exception e)
+			{
+				log.Log(LogSeverity.Error, $"Error launching the build process: {e.Message}");
+				var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Failed,
+					new TestResult[0]);
+				server.UpdateClientStatus(status);
+			}
+			catch (ApplicationException e)
+			{
+				log.Log(LogSeverity.Error, $"Error building the project: {e.Message}");
+				var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Failed,
+					new TestResult[0]);
+				server.UpdateClientStatus(status);
+			}
 		}
 
-		private static void ExecuteNUnitTestRunner(IServer server, BuildInstructions instructions)
+		private BuildInstructions GetBuildInstructions(IServer server)
 		{
-			Trace.WriteLine("Executing NUnit Test Runner");
+			log.Log(LogSeverity.Information, "Getting build instructions");
+			var instructions = server.GetBuildInstructions(Environment.MachineName);
+			log.Log(LogSeverity.Information, $"Building session {instructions.Session}");
+			var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.InProgress,
+				new TestResult[0]);
+			server.UpdateClientStatus(status);
+			return instructions;
+		}
+
+		private void ExecuteNUnitTestRunner(IServer server, BuildInstructions instructions)
+		{
+			log.Log(LogSeverity.Information, "Executing NUnit Test Runner");
 			XmlNode result2;
 			using (var r = new TestEngine())
 			{
@@ -35,7 +75,7 @@ namespace Yorkfield.Client
 				{
 					var filter = TestFilter.Empty;
 					var tests = runner.CountTestCases(filter);
-					Trace.WriteLine($"Found {tests} tests");
+					log.Log(LogSeverity.Information, $"Found {tests} tests");
 					result2 = runner.Run(null, filter);
 				}
 			}
@@ -43,23 +83,21 @@ namespace Yorkfield.Client
 			var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Successful,
 				new TestResult[0]);
 			server.UpdateClientStatus(status);
-			Trace.WriteLine("Test fixtures execution complete");
+			log.Log(LogSeverity.Information, "Test fixtures execution complete");
 		}
 
 		private void BuildProject(IServer server, BuildInstructions instructions)
 		{
-			Trace.WriteLine("Building project");
+			log.Log(LogSeverity.Information, "Building project");
 			var startOptions = new ProcessStartInfo(instructions.BuildCommand);
 			startOptions.UseShellExecute = false;
 			var process = Process.Start(startOptions);
-			var status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.InProgress,
-				new TestResult[0]);
-			server.UpdateClientStatus(status);
+			ClientInformation status;
 			if (!process.WaitForExit(TimeOutMilliseconds))
 			{
 				status = new ClientInformation(Environment.MachineName, instructions.Session, BuildStatus.Failed, new TestResult[0]);
 				server.UpdateClientStatus(status);
-				Trace.WriteLine("Build project is timed out");
+				log.Log(LogSeverity.Warning, $"Build project is timed out, {process.ExitTime}");
 				throw new TimeoutException();
 			}
 
@@ -68,7 +106,7 @@ namespace Yorkfield.Client
 			server.UpdateClientStatus(status);
 			if (result == BuildStatus.Failed)
 			{
-				Trace.WriteLine("Build project failed");
+				log.Log(LogSeverity.Error, $"Build project failed: executing {instructions.BuildCommand} - Exit code {process.ExitCode}");
 				throw new ApplicationException();
 			}
 		}

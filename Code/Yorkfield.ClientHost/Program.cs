@@ -34,7 +34,7 @@ namespace Yorkfield.ClientHost
 			builder.RegisterType<MyDataContractResolver>()
 				.As<DataContractResolver>()
 				.SingleInstance();
-
+			
 			builder.RegisterGeneric(typeof (ChannelFactory<>))
 				.UsingConstructor(typeof(string))
 				.WithParameter(new PositionalParameter(0, "*"))
@@ -42,6 +42,9 @@ namespace Yorkfield.ClientHost
 
 			builder.Register(CreateWcfClient<IServer>)
 				.As<IServer>();
+
+			builder.Register(CreateWcfClient<ILog>)
+				.As<ILog>();
 			
 			return builder.Build();
 		}

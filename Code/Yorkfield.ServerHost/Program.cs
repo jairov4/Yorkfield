@@ -35,6 +35,7 @@ namespace Yorkfield.ServerHost
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterType<MainServer>()
+				.SingleInstance()
 				.As<IServer>();
 
 			builder.RegisterType<LogServer>()
@@ -44,11 +45,11 @@ namespace Yorkfield.ServerHost
 				.As<IDbConnectionFactory>();
 
 			builder.RegisterType<MainServerWebMonitor>()
-				.SingleInstance()
-				.UsingConstructor(typeof(IServer), typeof(string))
+				.UsingConstructor(typeof (IServer), typeof (string))
 				.WithParameter(new PositionalParameter(1, Settings.Default.MainServerWebMonitorAddress))
 				.As<INancyModule>()
 				.As<MainServerWebMonitor>();
+				
 
 			builder.RegisterType<LogWebMonitor>()
 				.UsingConstructor(typeof (ILog), typeof (string))

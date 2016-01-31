@@ -18,9 +18,9 @@
 	</tr>
 	@Each.Clients
 	<tr>
-		<td>@Current.Session</td>
-		<td>@Current.Name</td>
-		<td>@Current.Status</td>
+		<td>@Current.Timestamp</td>
+		<td>@Current.Severity</td>
+		<td>@Current.Message</td>
 	</li>
 	@EndEach
 	</table>
